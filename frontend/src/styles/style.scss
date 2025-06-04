@@ -1,0 +1,350 @@
+@import './variables';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Rubik", sans-serif;
+}
+
+.app {
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fefefe;
+}
+
+.upload-wrapper.drag-active {
+  background-color: rgba(0, 184, 255, 0.05);
+  border: 2px dashed $primary;
+}
+
+.upload-wrapper {
+  padding: 20px;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.upload-fullscreen {
+  width: 100%;
+  height: 100%;
+  border: 2px dashed #ccc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  box-sizing: border-box;
+  text-align: center;
+
+   &.drag-active {
+    background-color: rgba(0, 183, 255, 0.9);
+    border-color: $primary;
+  }
+
+  .drop-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: $primary;
+    pointer-events: none;
+
+    svg {
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    p {
+      font-weight: bold;
+      font-size: 18px;
+      color: #fff;
+    }
+  }
+
+  .title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+    margin-bottom: 20px;
+
+    .help-icon {
+      cursor: pointer;
+      color: #555;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+
+    &.drag-active {
+      display: none;
+    }
+  }
+
+  .title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: $primary;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+    margin: 0;
+    font-family: "Rubik", sans-serif;
+    font-weight: 800;
+  }
+
+  .description {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 24px;
+    padding: 0 10px;
+    max-width: 600px;
+
+    &.drag-active {
+      display: none;
+    }
+  }
+
+  .upload-button {
+    background-color: $primary;
+    color: #fff;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+
+    &.drag-active {
+      display: none;
+    }
+
+    &:hover {
+      background-color: darken($primary, 10%);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .title {
+      font-size: 32px;
+    }
+
+    .description {
+      font-size: 16px;
+    }
+
+    .upload-button {
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 24px 32px;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+
+  h2 {
+    margin-top: 0;
+    color: #333;
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+
+  ul {
+    padding-left: 20px;
+
+    li {
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #555;
+    }
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+  color: #999;
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #000;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pdf-viewer-container {
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  .title-container {
+    margin-bottom: 20px;
+  }
+
+  .title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: $primary;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+    margin: 0;
+    font-family: "Rubik", sans-serif;
+    font-weight: 800;
+  }
+
+  .pdf-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+
+    button {
+      background-color: $primary;
+      border: none;
+      color: white;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: darken($primary, 10%);
+      }
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    .page-label {
+      font-weight: 600;
+      font-size: 14px;
+      color: #333;
+    }
+  }
+
+  .pdf-preview {
+    width: 90%;
+    max-width: 800px;
+    height: 600px;
+    margin: 0 auto 24px auto;
+    border: 1px solid #ccc;
+    overflow: hidden;
+
+    .rpv-core__viewer {
+      height: 100%;
+    }
+  }
+
+  .back-button {
+    background-color: $primary;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      background-color: darken($primary, 10%);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .title {
+      font-size: 28px;
+    }
+
+    .pdf-preview {
+      height: 400px;
+    }
+
+    .back-button {
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+  }
+}
+
+.upload-progress {
+  width: 90%;
+  max-width: 400px;
+  margin: 16px auto;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  position: relative;
+  background-color: #f3f3f3;
+
+  .progress-bar {
+    background-color: $primary;
+    height: 100%;
+    border-radius: 10px 0 0 10px;
+    transition: width 0.3s ease;
+  }
+
+  span {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: #333;
+    line-height: 20px;
+  }
+}
