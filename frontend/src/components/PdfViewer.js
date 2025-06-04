@@ -10,7 +10,6 @@ import {
   FaArrowLeft,
   FaArrowRight,
   FaExpand,
-  FaFileUpload,
 } from 'react-icons/fa';
 
 import '@react-pdf-viewer/core/lib/styles/index.css';
